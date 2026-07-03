@@ -64,26 +64,6 @@ An AI-powered interview preparation platform that:
 - AI Assistants
 - LLM Integrations
 
----
-
-# 📚 Currently Learning
-
-✅ Generative AI
-
-✅ AI Agents
-
-✅ MCP
-
-✅ LangChain
-
-✅ RAG
-
-✅ Vector Databases
-
-✅ MLOps
-
----
-
 # 💼 What I Love Building
 
 🤖 AI Applications
@@ -94,9 +74,6 @@ An AI-powered interview preparation platform that:
 
 ⚡ Automation Tools
 
-🌐 Full Stack AI Projects
-
----
 
 # 📈 GitHub Goals
 
