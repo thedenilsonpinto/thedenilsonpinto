@@ -1,0 +1,39 @@
+{
+  "login": "thedenilsonpinto",
+  "generated_at": "2026-09-23 17:53 UTC",
+  "contributions_year": 33,
+  "commits_year": 26,
+  "prs_year": 0,
+  "issues_year": 0,
+  "stars": 5,
+  "repos": 7,
+  "followers": 1,
+  "first_year": 2025,
+  "contributions_total": 34,
+  "streak_current": 1,
+  "streak_current_range": "Sep 23, 2026",
+  "streak_longest": 4,
+  "streak_longest_range": "Jun 05 \u2013 Jun 08, 2026",
+  "languages": [
+    {
+      "name": "Python",
+      "bytes": 73543,
+      "pct": 40.99501100922545
+    },
+    {
+      "name": "CSS",
+      "bytes": 47879,
+      "pct": 26.68914964185178
+    },
+    {
+      "name": "JavaScript",
+      "bytes": 33022,
+      "pct": 18.407424956102457
+    },
+    {
+      "name": "HTML",
+      "bytes": 24951,
+      "pct": 13.908414392820312
+    }
+  ]
+}
