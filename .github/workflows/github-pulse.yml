@@ -1,0 +1,63 @@
+# GitHub Pulse — refreshes the live stats cards + contribution snake every night.
+# Uses only the built-in GITHUB_TOKEN (public data). Optional: add a classic PAT as the
+# repository secret PULSE_TOKEN (scopes: read:user, repo) to also count private contributions.
+name: GitHub Pulse
+
+on:
+  schedule:
+    - cron: "17 18 * * *"     # 18:17 UTC = 23:47 IST, just before midnight
+  workflow_dispatch:           # run it by hand: Actions → GitHub Pulse → Run workflow
+  push:
+    branches: [main, master]
+    paths:
+      - ".github/workflows/github-pulse.yml"
+      - "forge/github_pulse.py"
+      - "forge/vampire/pulse.py"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: midnight-ai-lab-commits
+  cancel-in-progress: false
+
+jobs:
+  pulse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Install the forge
+        run: pip install -r forge/requirements.txt
+
+      - name: Fetch real GitHub stats and render the cards
+        env:
+          GITHUB_TOKEN: ${{ secrets.PULSE_TOKEN || secrets.GITHUB_TOKEN }}
+        run: python forge/github_pulse.py
+
+      - name: Generate the contribution snake
+        uses: Platane/snk/svg-only@v3
+        with:
+          github_user_name: ${{ github.repository_owner }}
+          outputs: |
+            dist/snake.svg?color_snake=#8B5CF6&color_dots=#12091C,#2E1065,#4C1D95,#6D28D9,#8B5CF6
+
+      - name: Frame the snake in the Midnight AI Lab panel
+        run: python forge/github_pulse.py --frame-snake dist/snake.svg
+
+      - name: Validate before committing
+        run: python forge/validate.py
+
+      - name: Commit the fresh stats
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/github
+          if git diff --staged --quiet; then echo "No changes tonight."; exit 0; fi
+          git commit -m "github pulse: nightly stats refresh [skip ci]"
+          git pull --rebase --autostash
+          git push

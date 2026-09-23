@@ -1,0 +1,7 @@
+# Midnight AI Lab forge — build dependencies (Python 3.10+).
+# Pinned so the GitHub Actions reproduce the committed SVGs byte-for-byte.
+fonttools==4.62.1
+brotli==1.2.0        # reads the .woff2 fonts
+uharfbuzz==0.56.2    # proper kerning/ligatures
+qrcode==8.2          # FlashDrop pairing QR (points at your GitHub profile)
+pillow==12.2.0       # embeds crops of the castle paintings (assets/backgrounds) as WebP
